@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thinking Styles Atlas · 思维方式图谱</title>
+
+<meta name="description" content="A bilingual, interactive comparison of 12 human thinking styles — Analytical, Critical, Systems, First-Principles, Lateral, Divergent, Convergent, Intuitive, Abstract, Concrete, Probabilistic, Design — across logic, creativity, speed, risk, depth, and adaptability. Side-by-side EN+中文 throughout, with interactive radar chart.">
+<meta name="keywords" content="thinking styles, cognitive styles, analytical thinking, critical thinking, systems thinking, first principles, design thinking, System 1 System 2, Daniel Kahneman, 思维方式, 认知风格">
+<meta name="author" content="Gewenbo">
+<link rel="canonical" href="https://minds.psyverse.fun/">
+<link rel="alternate" hreflang="en" href="https://minds.psyverse.fun/">
+<link rel="alternate" hreflang="zh-CN" href="https://minds.psyverse.fun/">
+<link rel="alternate" hreflang="x-default" href="https://minds.psyverse.fun/">
+<meta property="og:title" content="Thinking Styles Atlas · 思维方式图谱">
+<meta property="og:description" content="12 thinking styles, 6 dimensions, side-by-side bilingual. Interactive radar comparison + cognitive science framing.">
+<meta property="og:url" content="https://minds.psyverse.fun/">
+<meta property="og:site_name" content="Psyverse">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thinking Styles Atlas · 思维方式图谱">
+<meta name="twitter:description" content="12 thinking styles compared on logic, creativity, speed, risk, depth. Bilingual EN/中文.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#08080d">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Thinking Styles Atlas","description":"A bilingual interactive comparison of 12 human thinking styles.","url":"https://minds.psyverse.fun/","inLanguage":["en","zh-CN"],"author":{"@type":"Person","name":"Gewenbo","url":"https://psyverse.fun/"},"publisher":{"@type":"Organization","name":"Psyverse","url":"https://psyverse.fun/"}}
+</script>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2308080d'/><polygon points='16,5 26,11 26,21 16,27 6,21 6,11' fill='none' stroke='%23818cf8' stroke-width='1.5'/><circle cx='16' cy='16' r='3' fill='%23fbbf24'/></svg>">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #08080d;
+  --bg-2: #10111c;
+  --bg-3: #181a2c;
+  --line: #20223c;
+  --line-2: #2e3252;
+  --fg: #ebe8f0;
+  --fg-2: #b3b0c4;
+  --fg-3: #6f6c85;
+  --indigo: #818cf8;
+  --indigo-glow: #818cf844;
+  --gold: #fbbf24;
+  --rose: #fb7185;
+  --emerald: #34d399;
+  --cyan: #22d3ee;
+  --shadow: rgba(0,0,0,.4);
+}
+body.light {
+  --bg: #f8f7fb;
+  --bg-2: #efedf6;
+  --bg-3: #e3e0ee;
+  --line: #d3cfe3;
+  --line-2: #b3aecc;
+  --fg: #1a1828;
+  --fg-2: #4a4863;
+  --fg-3: #6f6c85;
+  --indigo: #4f46e5;
+  --gold: #b45309;
+  --rose: #be123c;
+  --emerald: #047857;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Space Grotesk', 'Noto Sans SC', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+}
+.mono { font-family: 'JetBrains Mono', monospace; }
+.serif { font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; }
+
+body::after {
+  content: ''; position: fixed; inset: 0;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(129,140,248,.07), transparent 50%),
+    radial-gradient(circle at 85% 100%, rgba(251,191,36,.05), transparent 60%);
+  pointer-events: none; z-index: 0;
+}
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 56px;
+  background: rgba(8,8,13,.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  z-index: 100;
+  display: flex; align-items: center;
+  padding: 0 24px; gap: 14px;
+  transition: background .3s, border-color .3s;
+}
+body.light nav { background: rgba(248,247,251,.85); }
+nav .logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700; font-size: 12px;
+  display: flex; align-items: center; gap: 10px;
+  color: var(--fg); text-decoration: none;
+  letter-spacing: 0.06em;
+}
+nav .logo .glyph {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--indigo);
+  position: relative;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--indigo-glow);
+}
+nav .logo .glyph::after {
+  content: ''; width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+nav .links {
+  display: flex; gap: 14px;
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+nav .links a { color: var(--fg-2); text-decoration: none; transition: color .15s; }
+nav .links a:hover { color: var(--indigo); }
+nav button.ctl {
+  background: transparent; color: var(--fg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all .15s;
+}
+nav button.ctl:hover { color: var(--indigo); border-color: var(--indigo); }
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero */
+.hero { padding: 120px 0 60px; }
+.tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--indigo);
+  border: 1px solid var(--line-2);
+  border-radius: 100px;
+  padding: 6px 14px;
+  margin-bottom: 28px;
+  letter-spacing: 0.04em;
+}
+.tag .dot {
+  width: 6px; height: 6px;
+  background: var(--indigo);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--indigo);
+}
+h1 {
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  font-size: clamp(40px, 6.5vw, 72px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.018em;
+  margin-bottom: 24px;
+}
+h1 .en { display: block; font-style: italic; }
+h1 .zh {
+  display: block;
+  font-family: 'Noto Serif SC', serif;
+  font-style: normal;
+  margin-top: 6px;
+  background: linear-gradient(135deg, var(--indigo) 0%, var(--gold) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lede-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  margin: 36px 0;
+  max-width: 920px;
+}
+@media (max-width: 720px) { .lede-pair { grid-template-columns: 1fr; gap: 16px; } }
+.lede-pair .l-en, .lede-pair .l-zh {
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.65;
+  color: var(--fg-2);
+  font-style: italic;
+}
+.lede-pair .l-zh { font-family: 'Noto Serif SC', serif; font-style: normal; }
+.lede-pair .l-en::before, .lede-pair .l-zh::before {
+  content: ''; display: block;
+  width: 24px; height: 1px;
+  background: var(--indigo);
+  margin-bottom: 14px;
+}
+
+/* 12-style intro pills */
+.styles-intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  margin: 40px 0 50px;
+}
+.spill {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 12px;
+  text-align: center;
+  transition: all .2s;
+}
+.spill:hover { transform: translateY(-2px); border-color: var(--indigo); }
+.spill .nm-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--fg);
+  font-weight: 500;
+  line-height: 1.15;
+}
+.spill .nm-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12px;
+  color: var(--fg-2);
+  margin-top: 3px;
+}
+
+.meta-row {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--fg-3);
+  margin: 16px 0 0;
+}
+.meta-row b { color: var(--indigo); font-weight: 500; }
+
+/* Section */
+section.chap {
+  padding: 80px 0;
+  border-top: 1px solid var(--line);
+  position: relative;
+  z-index: 1;
+}
+.chap-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--indigo);
+  letter-spacing: 0.14em;
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 12px;
+}
+.chap-num::before {
+  content: ''; width: 32px; height: 1px;
+  background: var(--indigo);
+}
+.chap h2 {
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  font-size: clamp(28px, 3.6vw, 44px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  line-height: 1.05;
+  font-style: italic;
+}
+.chap h2 .zh {
+  display: block;
+  font-family: 'Noto Serif SC', serif;
+  font-style: normal;
+  font-size: 0.62em;
+  color: var(--fg-2);
+  margin-top: 8px;
+  font-weight: 400;
+}
+
+/* Bilingual block */
+.bi {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin: 22px 0;
+  position: relative;
+  max-width: 980px;
+}
+.bi::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--line);
+  transform: translateX(-50%);
+}
+.bi .en, .bi .zh {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--fg-2);
+}
+.bi .en {
+  font-family: 'Space Grotesk', sans-serif;
+  padding-right: 12px;
+}
+.bi .zh {
+  font-family: 'Noto Sans SC', sans-serif;
+  padding-left: 12px;
+}
+.bi .en strong, .bi .zh strong { color: var(--fg); font-weight: 600; }
+.bi .en em, .bi .zh em { color: var(--fg); font-style: italic; }
+@media (max-width: 720px) {
+  .bi { grid-template-columns: 1fr; gap: 12px; }
+  .bi::before { display: none; }
+  .bi .en { padding-right: 0; padding-bottom: 12px; border-bottom: 1px dashed var(--line); }
+  .bi .zh { padding-left: 0; }
+}
+
+/* Profile cards */
+.profiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin: 28px 0;
+}
+.style-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 22px;
+  border-top: 3px solid var(--indigo);
+  transition: all .2s;
+}
+.style-card:hover { transform: translateY(-2px); border-color: var(--line-2); }
+.style-card.gold { border-top-color: var(--gold); }
+.style-card.rose { border-top-color: var(--rose); }
+.style-card.emerald { border-top-color: var(--emerald); }
+.style-card.cyan { border-top-color: var(--cyan); }
+.style-card .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--indigo);
+  letter-spacing: 0.12em;
+}
+.style-card.gold .num { color: var(--gold); }
+.style-card.rose .num { color: var(--rose); }
+.style-card.emerald .num { color: var(--emerald); }
+.style-card.cyan .num { color: var(--cyan); }
+.style-card .nm-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--fg);
+  line-height: 1.1;
+  margin-top: 4px;
+}
+.style-card .nm-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  color: var(--fg-2);
+  margin-bottom: 14px;
+}
+.style-card .sect {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  color: var(--indigo);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 12px 0 4px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+.style-card .sect:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+.style-card.gold .sect { color: var(--gold); }
+.style-card.rose .sect { color: var(--rose); }
+.style-card.emerald .sect { color: var(--emerald); }
+.style-card.cyan .sect { color: var(--cyan); }
+.style-card .body-en, .style-card .body-zh {
+  font-size: 13px; line-height: 1.6;
+  color: var(--fg-2);
+}
+.style-card .body-en { font-family: 'Space Grotesk', sans-serif; padding-right: 8px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); margin-bottom: 8px; }
+.style-card .body-zh { font-family: 'Noto Sans SC', sans-serif; padding-left: 8px; }
+.style-card .pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Radar */
+.radar-wrap {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 28px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+@media (max-width: 720px) { .radar-wrap { grid-template-columns: 1fr; } }
+#radar-canvas {
+  width: 100%;
+  max-width: 460px;
+  display: block;
+}
+.radar-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 240px;
+}
+.radar-controls .tt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--fg-3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.style-toggle {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--fg-2);
+  transition: all .15s;
+  position: relative;
+}
+.style-toggle:hover { color: var(--fg); border-color: var(--line-2); }
+.style-toggle.active {
+  border-color: var(--c, var(--indigo));
+  color: var(--c, var(--indigo));
+  background: rgba(0,0,0,.15);
+}
+body.light .style-toggle.active { background: rgba(0,0,0,.04); }
+.style-toggle .sw {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--c, var(--indigo));
+}
+.style-toggle .zh-mini {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 11px;
+  color: var(--fg-3);
+  margin-left: auto;
+}
+
+/* Comparison table */
+.tbl-wrap { overflow-x: auto; margin: 28px 0; }
+table.dt {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  min-width: 640px;
+}
+table.dt th, table.dt td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  line-height: 1.55;
+}
+table.dt th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--indigo);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  border-bottom: 1px solid var(--indigo);
+  background: var(--bg-2);
+}
+table.dt td:first-child {
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  font-style: italic;
+  color: var(--fg);
+  font-size: 15px;
+  white-space: nowrap;
+}
+table.dt .both .zh-row {
+  display: block;
+  font-family: 'Noto Sans SC', sans-serif;
+  color: var(--fg-3);
+  margin-top: 4px;
+  font-size: 12px;
+}
+table.dt th .zh { display: block; color: var(--fg-3); font-size: 9px; margin-top: 2px; font-weight: 400; letter-spacing: 0.04em; }
+
+/* Insight */
+.insight {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--indigo);
+  border-radius: 8px;
+  padding: 22px 24px;
+  margin: 28px 0;
+}
+.insight .lab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--indigo);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+.insight .pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+@media (max-width: 720px) { .insight .pair { grid-template-columns: 1fr; gap: 14px; } }
+.insight .pair p {
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  font-size: 17px;
+  color: var(--fg);
+  font-style: italic;
+  line-height: 1.55;
+  margin: 0;
+}
+.insight .pair p.zh {
+  font-family: 'Noto Serif SC', serif;
+  font-style: normal;
+}
+
+/* Best-for ranker */
+.best {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 32px 0;
+}
+.best-tabs {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.best-tab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--fg-2);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all .15s;
+  letter-spacing: 0.04em;
+}
+.best-tab:hover { color: var(--fg); }
+.best-tab.active {
+  color: var(--indigo);
+  border-color: var(--indigo);
+  background: rgba(129,140,248,.08);
+}
+.best-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+@media (max-width: 720px) { .best-list { grid-template-columns: 1fr; } }
+.best-list .b-en, .best-list .b-zh {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--fg-2);
+}
+.best-list .b-zh { font-family: 'Noto Sans SC', sans-serif; }
+.best-list ol {
+  list-style: none;
+  margin: 0;
+  counter-reset: r;
+}
+.best-list ol li {
+  counter-increment: r;
+  padding: 10px 0;
+  border-top: 1px dashed var(--line);
+  display: flex; gap: 12px;
+}
+.best-list ol li:first-child { border-top: none; }
+.best-list ol li::before {
+  content: counter(r, decimal-leading-zero);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--indigo);
+  font-weight: 600;
+  flex-shrink: 0;
+  width: 24px;
+}
+.best-list ol li b { color: var(--fg); margin-right: 6px; font-weight: 600; }
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 56px 0 80px;
+  margin-top: 60px;
+  position: relative;
+  z-index: 1;
+}
+.foot-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+@media (max-width: 720px) { .foot-pair { grid-template-columns: 1fr; gap: 14px; } }
+.foot-pair p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--fg-2);
+  line-height: 1.6;
+}
+.foot-pair p.zh { font-family: 'Noto Serif SC', serif; font-style: normal; }
+.foot-bottom {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--fg-3);
+  font-family: 'JetBrains Mono', monospace;
+}
+.foot-bottom a { color: var(--indigo); text-decoration: none; }
+
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s, transform .6s; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  nav .links { display: none; }
+  .hero { padding: 90px 0 40px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#"><span class="glyph"></span> MINDS · 思维方式图谱</a>
+  <div class="links">
+    <a href="#what">01</a>
+    <a href="#dimensions">02</a>
+    <a href="#profiles">03</a>
+    <a href="#radar">⌬</a>
+    <a href="#problem">04</a>
+    <a href="#decision">06</a>
+    <a href="#bias">08</a>
+    <a href="#hybrid">09</a>
+    <a href="#ai">vs AI</a>
+  </div>
+  <button class="ctl" onclick="document.body.classList.toggle('light'); this.textContent=document.body.classList.contains('light')?'☾':'☀'">☀</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="tag"><span class="dot"></span> 12 STYLES · 6 DIMENSIONS · 1 BILINGUAL ATLAS · 12 思维 · 6 维度 · 中英对照</div>
+    <h1>
+      <span class="en">How a mind chooses to think.</span>
+      <span class="zh">心智如何选择思考的方式。</span>
+    </h1>
+    <div class="lede-pair">
+      <div class="l-en">A side-by-side bilingual comparison of the twelve thinking styles humans use most — analytical, critical, systems, first-principles, lateral, divergent, convergent, intuitive, abstract, concrete, probabilistic, design. Each carries strengths, blind spots, and best-fit problems. The atlas treats them as tools in a kit, not as virtues to be ranked.</div>
+      <div class="l-zh">人类最常使用的十二种思维方式的并排双语对比——分析、批判、系统、第一性原理、横向、发散、收敛、直觉、抽象、具体、概率、设计。每一种都有其长处、盲点与最适问题。本图谱把它们当作工具箱中的工具，而非可被排名的美德。</div>
+    </div>
+
+    <div class="styles-intro">
+      <div class="spill"><div class="nm-en"><em>Analytical</em></div><div class="nm-zh">分析</div></div>
+      <div class="spill"><div class="nm-en"><em>Critical</em></div><div class="nm-zh">批判</div></div>
+      <div class="spill"><div class="nm-en"><em>Systems</em></div><div class="nm-zh">系统</div></div>
+      <div class="spill"><div class="nm-en"><em>First-Principles</em></div><div class="nm-zh">第一性原理</div></div>
+      <div class="spill"><div class="nm-en"><em>Lateral</em></div><div class="nm-zh">横向</div></div>
+      <div class="spill"><div class="nm-en"><em>Divergent</em></div><div class="nm-zh">发散</div></div>
+      <div class="spill"><div class="nm-en"><em>Convergent</em></div><div class="nm-zh">收敛</div></div>
+      <div class="spill"><div class="nm-en"><em>Intuitive</em></div><div class="nm-zh">直觉</div></div>
+      <div class="spill"><div class="nm-en"><em>Abstract</em></div><div class="nm-zh">抽象</div></div>
+      <div class="spill"><div class="nm-en"><em>Concrete</em></div><div class="nm-zh">具体</div></div>
+      <div class="spill"><div class="nm-en"><em>Probabilistic</em></div><div class="nm-zh">概率</div></div>
+      <div class="spill"><div class="nm-en"><em>Design</em></div><div class="nm-zh">设计</div></div>
+    </div>
+
+    <div class="meta-row">
+      <span>Compiled · <b>April 2026</b></span>
+      <span>Styles · <b>12</b></span>
+      <span>Sections · <b>9</b></span>
+      <span>Dimensions · <b>6</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- 1 WHAT -->
+<section class="chap reveal" id="what">
+  <div class="container">
+    <div class="chap-num">01 · DEFINITION</div>
+    <h2>What "thinking style" means <span class="zh">「思维方式」之意</span></h2>
+    <div class="bi">
+      <div class="en">A <strong>thinking style</strong> is a habitual configuration of attention, inference, and decision rules. It is not the same as intelligence (raw cognitive horsepower) or knowledge (what you've learned). Two people of equal IQ and identical education will reliably reach different conclusions because they reach for different cognitive tools by default.</div>
+      <div class="zh"><strong>思维方式</strong>是一种关于注意力、推理与决策规则的惯性配置。它不等同于智力（原始认知马力）或知识（你所学之物）。两个智商相同、教育相同的人会可靠地得出不同结论——因为他们默认拿起的认知工具不同。</div>
+    </div>
+    <div class="bi">
+      <div class="en">Most humans default to one or two styles and use them across all situations — even when those situations call for a different tool. The deepest cognitive skill is not "having the right style" but <em>being able to switch</em> deliberately when context changes. Meta-thinking — thinking about how you think — is the move that unlocks the switch.</div>
+      <div class="zh">多数人默认使用一两种思维方式，并把它们应用于所有情境——即便情境呼唤不同的工具。最深的认知技能不是「拥有正确的方式」，而是<em>能在情境变化时刻意切换</em>。元思维——思考你如何思考——正是解锁切换的那个动作。</div>
+    </div>
+    <div class="insight">
+      <div class="lab">Worth noting · 值得注意</div>
+      <div class="pair">
+        <p>You probably default to two styles and resist the other ten. The radar in §03 is most useful as a mirror — what shape is your habitual cognition, and what shape does the problem in front of you actually have?</p>
+        <p class="zh">你大概默认依赖两种思维方式，并抗拒其余十种。第 03 节的雷达图作为一面镜子最为有用——你惯性认知是什么形状？而你眼前的问题实际上是什么形状？</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 DIMENSIONS -->
+<section class="chap reveal" id="dimensions">
+  <div class="container">
+    <div class="chap-num">02 · COMPARISON DIMENSIONS</div>
+    <h2>Six axes that separate them <span class="zh">区分它们的六个维度</span></h2>
+    <div class="tbl-wrap">
+      <table class="dt">
+        <thead>
+          <tr><th>Dimension<span class="zh">维度</span></th><th>What it measures<span class="zh">所衡量</span></th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Logic · 逻辑</td>
+            <td class="both">Rigour of formal inference. Do conclusions follow from premises?<span class="zh-row">形式推理的严谨度。结论是否由前提合乎逻辑地推出？</span></td>
+          </tr>
+          <tr>
+            <td>Creativity · 创造</td>
+            <td class="both">Capacity to generate genuinely novel options.<span class="zh-row">生成真正新颖选项的能力。</span></td>
+          </tr>
+          <tr>
+            <td>Speed · 速度</td>
+            <td class="both">Time from input to actionable conclusion.<span class="zh-row">从输入到可行动结论的时间。</span></td>
+          </tr>
+          <tr>
+            <td>Risk · 风险</td>
+            <td class="both">Tolerance for being wrong, weird, or unconventional.<span class="zh-row">对「错」「怪」「异」的耐受度。</span></td>
+          </tr>
+          <tr>
+            <td>Depth · 深度</td>
+            <td class="both">Capacity to handle complex, multi-layered structure.<span class="zh-row">处理复杂多层结构的能力。</span></td>
+          </tr>
+          <tr>
+            <td>Adaptability · 适应</td>
+            <td class="both">Performance when goals or environment shift mid-process.<span class="zh-row">目标或环境中途变化时的表现。</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 3 PROFILES -->
+<section class="chap reveal" id="profiles">
+  <div class="container">
+    <div class="chap-num">03 · TWELVE PROFILES</div>
+    <h2>Each style, on its own terms <span class="zh">每一种方式 · 各得其所</span></h2>
+
+    <div class="profiles">
+
+      <div class="style-card">
+        <div class="num">01 · ANALYTICAL · 分析</div>
+        <div class="nm-en"><em>Analytical Thinking</em></div>
+        <div class="nm-zh">分析性思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Decompose a complex problem into named, bounded sub-parts. Solve each. Reassemble. The default mode of engineering, accounting, science.</div>
+          <div class="body-zh">把复杂问题分解为命名清晰、边界明确的子部分。逐一解决。再组装。工程、会计、科学的默认模式。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Reliable, debuggable.<br><strong>−</strong> Misses emergent properties; trips on irreducible problems.</div>
+          <div class="body-zh"><strong>+</strong> 可靠，可调试。<br><strong>−</strong> 忽略涌现性质；面对不可分解问题失灵。</div>
+        </div>
+      </div>
+
+      <div class="style-card gold">
+        <div class="num">02 · CRITICAL · 批判</div>
+        <div class="nm-en"><em>Critical Thinking</em></div>
+        <div class="nm-zh">批判性思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Test claims against evidence, logic, and source quality. Ask "how do you know?" before "what do you mean?"</div>
+          <div class="body-zh">用证据、逻辑与信息源质量检验主张。先问「你怎么知道？」再问「你是什么意思？」</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Catches motivated reasoning.<br><strong>−</strong> Can become reflexive negation; produces no new ideas of its own.</div>
+          <div class="body-zh"><strong>+</strong> 识破动机性推理。<br><strong>−</strong> 易变为反射性否定；自身不产生新想法。</div>
+        </div>
+      </div>
+
+      <div class="style-card emerald">
+        <div class="num">03 · SYSTEMS · 系统</div>
+        <div class="nm-en"><em>Systems Thinking</em></div>
+        <div class="nm-zh">系统性思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Behavior emerges from structure: stocks, flows, feedback loops. Map the loop before reaching for the lever.</div>
+          <div class="body-zh">行为由结构涌现：存量、流量、反馈回路。在按下杠杆之前先映射回路。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Reveals counter-intuitive interventions.<br><strong>−</strong> Slow; risks paralysis at scale.</div>
+          <div class="body-zh"><strong>+</strong> 揭示反直觉的干预。<br><strong>−</strong> 慢；规模过大时易陷入瘫痪。</div>
+        </div>
+      </div>
+
+      <div class="style-card cyan">
+        <div class="num">04 · FIRST-PRINCIPLES · 第一性原理</div>
+        <div class="nm-en"><em>First-Principles Thinking</em></div>
+        <div class="nm-zh">第一性原理思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Strip the problem down to physical or logical primitives. Refuse to reason by analogy. Rebuild upward.</div>
+          <div class="body-zh">把问题剥离到物理或逻辑的基元。拒绝以类比推理。自下而上重建。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Breaks priors. Unlocks 10× moves.<br><strong>−</strong> Slow; can re-derive what was already known.</div>
+          <div class="body-zh"><strong>+</strong> 击穿成见。解锁十倍突破。<br><strong>−</strong> 慢；可能重新推导已知之事。</div>
+        </div>
+      </div>
+
+      <div class="style-card rose">
+        <div class="num">05 · LATERAL · 横向</div>
+        <div class="nm-en"><em>Lateral Thinking</em></div>
+        <div class="nm-zh">横向思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Edward de Bono. Approach the problem from oblique angles — provocations, random word, reversal. Specifically designed to escape the dominant frame.</div>
+          <div class="body-zh">由 Edward de Bono 提出。从倾斜的角度切入问题——挑衅性命题、随机词、反转。专为逃离主导框架而设计。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Generates the "obvious in retrospect" insight.<br><strong>−</strong> Useless when the problem is already well-framed.</div>
+          <div class="body-zh"><strong>+</strong> 产生「事后看来显然」的洞见。<br><strong>−</strong> 当问题已被良好框架化时，无用。</div>
+        </div>
+      </div>
+
+      <div class="style-card rose">
+        <div class="num">06 · DIVERGENT · 发散</div>
+        <div class="nm-en"><em>Divergent Thinking</em></div>
+        <div class="nm-zh">发散性思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Generate as many ideas as possible. Quantity, fluency, variety. The "open" half of every creative process.</div>
+          <div class="body-zh">尽可能多地产生想法。数量、流畅、多样。任何创造过程中「打开」的那一半。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Wide option space.<br><strong>−</strong> Without convergent counterpart, produces piles of unmade decisions.</div>
+          <div class="body-zh"><strong>+</strong> 广阔的选项空间。<br><strong>−</strong> 没有收敛对位时，只产生堆积如山的「未做决定」。</div>
+        </div>
+      </div>
+
+      <div class="style-card emerald">
+        <div class="num">07 · CONVERGENT · 收敛</div>
+        <div class="nm-en"><em>Convergent Thinking</em></div>
+        <div class="nm-zh">收敛性思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Narrow many options to one. Apply criteria, eliminate, decide. The "close" half of every creative process. Required for shipping.</div>
+          <div class="body-zh">把多个选项收敛为一个。应用标准、剔除、决定。任何创造过程中「关闭」的那一半。交付的必需。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Produces decisions.<br><strong>−</strong> Without divergent prelude, narrows to the obvious answer.</div>
+          <div class="body-zh"><strong>+</strong> 产生决定。<br><strong>−</strong> 没有发散先导时，收敛到「显而易见」的答案。</div>
+        </div>
+      </div>
+
+      <div class="style-card gold">
+        <div class="num">08 · INTUITIVE · 直觉</div>
+        <div class="nm-en"><em>Intuitive Thinking</em></div>
+        <div class="nm-zh">直觉思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Pattern recognition trained by deep experience. Conclusion arrives without conscious chain. Kahneman's "System 1." Powerful when domain feedback is fast and frequent.</div>
+          <div class="body-zh">由深度经验训练出的模式识别。结论到来时无意识链条。Kahneman 的「系统 1」。当领域反馈快且频繁时强大。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Effortless, fast.<br><strong>−</strong> Confident-but-wrong in unfamiliar domains. Source of most biases.</div>
+          <div class="body-zh"><strong>+</strong> 轻松、快。<br><strong>−</strong> 在陌生领域「自信而错误」。多数偏误的源头。</div>
+        </div>
+      </div>
+
+      <div class="style-card cyan">
+        <div class="num">09 · ABSTRACT · 抽象</div>
+        <div class="nm-en"><em>Abstract Thinking</em></div>
+        <div class="nm-zh">抽象思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Reason in concepts, principles, and structural relationships rather than specific instances. The mental tool of mathematics, philosophy, theoretical CS.</div>
+          <div class="body-zh">以概念、原理、结构性关系而非具体实例进行推理。数学、哲学、理论计算机科学的心智工具。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Generalizes across domains.<br><strong>−</strong> Detached from grounding; produces "elegant" things that don't ship.</div>
+          <div class="body-zh"><strong>+</strong> 跨领域泛化。<br><strong>−</strong> 脱离落地；产生「优雅」却无法交付之物。</div>
+        </div>
+      </div>
+
+      <div class="style-card">
+        <div class="num">10 · CONCRETE · 具体</div>
+        <div class="nm-en"><em>Concrete Thinking</em></div>
+        <div class="nm-zh">具体思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Stay with the literal, the immediate, the sensory. The mode of children, of trade craftsmen, of practical operations.</div>
+          <div class="body-zh">停留于字面、即时、感官。儿童、手艺人、实际操作的模式。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Reliable in known territory; immune to abstract delusion.<br><strong>−</strong> Cannot generalize; recreates wheels.</div>
+          <div class="body-zh"><strong>+</strong> 在已知领地可靠；免疫抽象幻觉。<br><strong>−</strong> 无法泛化；不断重新造轮。</div>
+        </div>
+      </div>
+
+      <div class="style-card emerald">
+        <div class="num">11 · PROBABILISTIC · 概率</div>
+        <div class="nm-en"><em>Probabilistic Thinking</em></div>
+        <div class="nm-zh">概率思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Treat outcomes as distributions, not single values. Bayes; expected value; calibrated uncertainty. The mental tool of poker, trading, public health.</div>
+          <div class="body-zh">把结果视为分布而非单一值。贝叶斯；期望值；校准的不确定性。扑克、交易、公共卫生的心智工具。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Robust under uncertainty.<br><strong>−</strong> Counter-intuitive to most humans; communicates poorly to non-quants.</div>
+          <div class="body-zh"><strong>+</strong> 在不确定下稳健。<br><strong>−</strong> 对多数人反直觉；难向非量化者传达。</div>
+        </div>
+      </div>
+
+      <div class="style-card rose">
+        <div class="num">12 · DESIGN · 设计</div>
+        <div class="nm-en"><em>Design Thinking</em></div>
+        <div class="nm-zh">设计思维</div>
+        <div class="sect">Definition · 定义</div>
+        <div class="pair">
+          <div class="body-en">Empathize → define → ideate → prototype → test. IDEO + Stanford d.school. Iterative; user-anchored; comfortable with provisional answers.</div>
+          <div class="body-zh">同理 → 定义 → 构想 → 原型 → 测试。IDEO + 斯坦福设计学院。迭代性；以用户为锚；接受暂时性答案。</div>
+        </div>
+        <div class="sect">Strengths · Weaknesses · 优点 · 弱点</div>
+        <div class="pair">
+          <div class="body-en"><strong>+</strong> Bridges abstract and concrete; ships things.<br><strong>−</strong> Sometimes substitutes process for substance.</div>
+          <div class="body-zh"><strong>+</strong> 桥接抽象与具体；能交付。<br><strong>−</strong> 有时以流程替代实质。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RADAR -->
+<section class="chap reveal" id="radar">
+  <div class="container">
+    <div class="chap-num">⌬ · INTERACTIVE RADAR</div>
+    <h2>Compare any 2–4 styles, live <span class="zh">实时对比任意 2-4 种思维</span></h2>
+    <div class="bi">
+      <div class="en">Click any toggle below to add or remove a style. Each shows its profile across the 6 dimensions defined in §02. The shape is the style — and reading the gaps between two shapes reveals when each is the right tool.</div>
+      <div class="zh">点击下方任一开关以添加或移除一种思维方式。每种方式按第 02 节定义的 6 个维度展示其形态。形状即思维——而两种形状之间的差距，揭示了每一种何时是合适的工具。</div>
+    </div>
+
+    <div class="radar-wrap">
+      <canvas id="radar-canvas" width="500" height="500"></canvas>
+      <div class="radar-controls">
+        <div class="tt">12 styles · click to toggle · 12 种 · 点击切换</div>
+        <div class="style-toggle active" data-id="analytical" style="--c:#818cf8"><span class="sw"></span><span><em>Analytical</em></span><span class="zh-mini">分析</span></div>
+        <div class="style-toggle" data-id="critical" style="--c:#fbbf24"><span class="sw"></span><span><em>Critical</em></span><span class="zh-mini">批判</span></div>
+        <div class="style-toggle" data-id="systems" style="--c:#34d399"><span class="sw"></span><span><em>Systems</em></span><span class="zh-mini">系统</span></div>
+        <div class="style-toggle active" data-id="firstprinciples" style="--c:#22d3ee"><span class="sw"></span><span><em>First-Principles</em></span><span class="zh-mini">第一性</span></div>
+        <div class="style-toggle" data-id="lateral" style="--c:#fb7185"><span class="sw"></span><span><em>Lateral</em></span><span class="zh-mini">横向</span></div>
+        <div class="style-toggle active" data-id="divergent" style="--c:#f472b6"><span class="sw"></span><span><em>Divergent</em></span><span class="zh-mini">发散</span></div>
+        <div class="style-toggle" data-id="convergent" style="--c:#a78bfa"><span class="sw"></span><span><em>Convergent</em></span><span class="zh-mini">收敛</span></div>
+        <div class="style-toggle" data-id="intuitive" style="--c:#facc15"><span class="sw"></span><span><em>Intuitive</em></span><span class="zh-mini">直觉</span></div>
+        <div class="style-toggle" data-id="abstract" style="--c:#06b6d4"><span class="sw"></span><span><em>Abstract</em></span><span class="zh-mini">抽象</span></div>
+        <div class="style-toggle" data-id="concrete" style="--c:#84cc16"><span class="sw"></span><span><em>Concrete</em></span><span class="zh-mini">具体</span></div>
+        <div class="style-toggle" data-id="probabilistic" style="--c:#10b981"><span class="sw"></span><span><em>Probabilistic</em></span><span class="zh-mini">概率</span></div>
+        <div class="style-toggle" data-id="design" style="--c:#ec4899"><span class="sw"></span><span><em>Design</em></span><span class="zh-mini">设计</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 PROBLEM -->
+<section class="chap reveal" id="problem">
+  <div class="container">
+    <div class="chap-num">04 · ONE PROBLEM, FIVE STYLES</div>
+    <h2>The same question, five different shapes <span class="zh">同一问题，五种不同形状</span></h2>
+    <div class="bi">
+      <div class="en">Problem: <em>"Our business is losing customers and we don't know why."</em></div>
+      <div class="zh">问题：<em>「我们的业务在流失客户，我们不知道原因。」</em></div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="dt">
+        <thead><tr><th>Style<span class="zh">思维方式</span></th><th>Reasoning<span class="zh">推理路径</span></th></tr></thead>
+        <tbody>
+          <tr><td>Analytical · 分析</td><td class="both"><strong>Decompose:</strong> segment churn by cohort, plan, geography, channel. Identify which slice drops fastest. Solve that slice.<span class="zh-row"><strong>分解：</strong>按群组、套餐、地理、渠道切分流失。识别下降最快的切片。解决该切片。</span></td></tr>
+          <tr><td>Systems · 系统</td><td class="both"><strong>Map the loop:</strong> support quality → renewal rate → revenue → support budget → support quality. Notice where the loop is reinforcing decline.<span class="zh-row"><strong>映射回路：</strong>支持质量 → 续费率 → 营收 → 支持预算 → 支持质量。注意回路在何处强化衰退。</span></td></tr>
+          <tr><td>First-Principles · 第一性原理</td><td class="both"><strong>Re-derive:</strong> what does a customer fundamentally need from this product? Are we still delivering that? If not, the rest is irrelevant.<span class="zh-row"><strong>重新推导：</strong>客户从这产品根本上需要什么？我们仍在交付吗？若否，其余无关紧要。</span></td></tr>
+          <tr><td>Probabilistic · 概率</td><td class="both"><strong>Quantify:</strong> what's the prior probability churn = pricing vs product vs market? Run a quick survey to update beliefs.<span class="zh-row"><strong>量化：</strong>流失因价格、产品、市场的先验概率各为多少？做快速调研以更新信念。</span></td></tr>
+          <tr><td>Design · 设计</td><td class="both"><strong>Talk to 10 churned users:</strong> what was the breaking moment? Sketch a fix. Prototype. Test in a week.<span class="zh-row"><strong>访谈 10 名已流失用户：</strong>「转折时刻」是什么？草拟修复。原型。一周内测试。</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight">
+      <div class="lab">The point · 要点</div>
+      <div class="pair">
+        <p>None of these is wrong. The right move is to use 2–3 in sequence: Design (talk to humans) + Probabilistic (size the bets) + Analytical (verify in data). Single-style thinkers usually pick one and run too long with it.</p>
+        <p class="zh">没有一种是错的。正确的做法是按顺序使用 2-3 种：设计（与人对话）+ 概率（衡量押注）+ 分析（在数据中验证）。单一风格的思考者常选其一，并持续过久。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 DECISION -->
+<section class="chap reveal" id="decision">
+  <div class="container">
+    <div class="chap-num">06 · DECISION-MAKING</div>
+    <h2>Fast vs slow · System 1 vs System 2 <span class="zh">快与慢 · 系统 1 vs 系统 2</span></h2>
+    <div class="bi">
+      <div class="en">Daniel Kahneman's framing (<em>Thinking, Fast and Slow</em>, 2011): two systems run in parallel. <strong>System 1</strong> is fast, automatic, effortless, often right in familiar contexts and confidently wrong outside them. <strong>System 2</strong> is slow, deliberate, effortful, accurate but expensive. Most cognitive errors are System 1 misfires that System 2 failed to catch.</div>
+      <div class="zh">Daniel Kahneman 的框架（《思考，快与慢》，2011）：两套系统并行运转。<strong>系统 1</strong> 快、自动、轻松，在熟悉情境中常对，在外则自信而错。<strong>系统 2</strong> 慢、刻意、费力，准确但昂贵。多数认知错误是系统 2 没能拦截的系统 1 失火。</div>
+    </div>
+    <div class="bi">
+      <div class="en"><strong>Intuitive Thinking</strong> is System 1 in pure form. <strong>Probabilistic + Analytical</strong> are System 2 in pure form. Mature decision-makers use System 1 for high-frequency low-stakes choices and force System 2 engagement for low-frequency high-stakes ones — and have learned to <em>recognize the difference</em>, which is itself a System 2 skill.</div>
+      <div class="zh"><strong>直觉思维</strong>是纯粹形态的系统 1。<strong>概率思维 + 分析思维</strong>是纯粹形态的系统 2。成熟决策者用系统 1 处理高频低赌注选择，强制系统 2 参与低频高赌注选择——并学会<em>识别两者的区别</em>，而这本身即是一项系统 2 技能。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 BIAS -->
+<section class="chap reveal" id="bias">
+  <div class="container">
+    <div class="chap-num">08 · BIAS &amp; LIMITATIONS</div>
+    <h2>How each style fails <span class="zh">每种方式如何失败</span></h2>
+    <div class="bi">
+      <div class="en">Every thinking style has a characteristic failure mode. The biases below cluster around the styles that produce them. The cure is rarely "be smarter" — it is usually "switch tools."</div>
+      <div class="zh">每种思维方式都有典型的失败模式。下方的偏误围绕产生它们的思维方式聚类。解药鲜有「更聪明」——通常是「换工具」。</div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="dt">
+        <thead><tr><th>Bias<span class="zh">偏误</span></th><th>Description<span class="zh">描述</span></th><th>Most-used by<span class="zh">主要使用者</span></th></tr></thead>
+        <tbody>
+          <tr><td>Confirmation Bias · 确认偏误</td><td class="both">Seeks evidence supporting existing beliefs.<span class="zh-row">寻找支持既有信念的证据。</span></td><td>Intuitive · Critical (when defending) · 直觉、批判（防御时）</td></tr>
+          <tr><td>Anchoring · 锚定</td><td class="both">First number heard distorts subsequent estimates.<span class="zh-row">先听到的数字扭曲后续估计。</span></td><td>Intuitive · Convergent · 直觉、收敛</td></tr>
+          <tr><td>Availability · 易得性</td><td class="both">Overweights recent or vivid examples.<span class="zh-row">高估近期或鲜明的例子。</span></td><td>Intuitive · Concrete · 直觉、具体</td></tr>
+          <tr><td>Reductionism · 还原</td><td class="both">Loses emergent properties by decomposition.<span class="zh-row">通过分解失去涌现性质。</span></td><td>Analytical · 分析</td></tr>
+          <tr><td>Paralysis-by-Analysis · 分析瘫痪</td><td class="both">Endless decomposition without convergence.<span class="zh-row">无止境的分解、无收敛。</span></td><td>Systems · Analytical · 系统、分析</td></tr>
+          <tr><td>Premature Closure · 过早收束</td><td class="both">Picks first viable answer; closes search.<span class="zh-row">选择首个可行答案；关闭搜索。</span></td><td>Convergent · Intuitive · 收敛、直觉</td></tr>
+          <tr><td>Abstraction Detachment · 抽象脱离</td><td class="both">Builds elegant systems disconnected from reality.<span class="zh-row">构建脱离现实的优雅体系。</span></td><td>Abstract · First-Principles · 抽象、第一性原理</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 9 HYBRID -->
+<section class="chap reveal" id="hybrid">
+  <div class="container">
+    <div class="chap-num">09 · HYBRID THINKING</div>
+    <h2>The best thinkers switch tools <span class="zh">最好的思考者会切换工具</span></h2>
+    <div class="bi">
+      <div class="en">No single style is best. Single-style thinkers reliably underperform multi-style thinkers — even at lower raw IQ — because more problems get the right tool. The real cognitive skill is <strong>meta-thinking</strong>: noticing what shape the current problem actually has, and reaching for the matching tool.</div>
+      <div class="zh">没有任何单一方式是最好的。单一方式的思考者可靠地不如多方式思考者——即便后者原始智商更低——因为更多问题获得正确的工具。真正的认知技能是<strong>元思维</strong>：注意当前问题实际上是什么形状，并伸手去拿匹配的工具。</div>
+    </div>
+
+    <div class="best">
+      <div class="best-tabs" id="best-tabs">
+        <button class="best-tab active" data-key="creative">Need creativity · 需要创造</button>
+        <button class="best-tab" data-key="decision">High-stakes decision · 重大决策</button>
+        <button class="best-tab" data-key="complex">Complex system · 复杂系统</button>
+        <button class="best-tab" data-key="speed">Speed required · 需要速度</button>
+        <button class="best-tab" data-key="novel">Novel domain · 全新领域</button>
+      </div>
+      <div class="best-list" id="best-list"></div>
+    </div>
+
+    <div class="insight">
+      <div class="lab">Honest closing · 诚实结语</div>
+      <div class="pair">
+        <p>The best decision-makers in the world are not strongest at any single style — they are fastest at switching. They notice within seconds when their current tool isn't working and pick up another without ego attachment. This skill is teachable, but it is taught mostly by failure.</p>
+        <p class="zh">世界上最好的决策者并非在任何单一方式上最强——而是切换最快。他们能在数秒内注意到当前工具不奏效，并不带自我执着地拿起另一件。这项技能可教，但主要由失败教授。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI vs HUMAN -->
+<section class="chap reveal" id="ai">
+  <div class="container">
+    <div class="chap-num">★ · HUMAN vs AI THINKING</div>
+    <h2>Where the styles map differently <span class="zh">思维方式的映射差异</span></h2>
+    <div class="tbl-wrap">
+      <table class="dt">
+        <thead><tr><th>Style<span class="zh">思维方式</span></th><th>Human<span class="zh">人类</span></th><th>Frontier AI (2026)<span class="zh">前沿 AI</span></th></tr></thead>
+        <tbody>
+          <tr><td>Analytical · 分析</td><td class="both">Slow, careful, biased by working memory limits.<span class="zh-row">慢、谨慎，受工作记忆限制带来偏差。</span></td><td class="both">Fast, exhaustive, no working-memory limit.<span class="zh-row">快、详尽，无工作记忆限制。</span></td></tr>
+          <tr><td>Critical · 批判</td><td class="both">Strong when motivated; weak under social pressure.<span class="zh-row">有动机时强；社会压力下弱。</span></td><td class="both">Will critique anything if asked; doesn't know when to stop.<span class="zh-row">被要求时可批判一切；不知何时停止。</span></td></tr>
+          <tr><td>First-Principles · 第一性原理</td><td class="both">Rare and valuable. Costs intellectual labor.<span class="zh-row">稀少而宝贵。需智力劳动。</span></td><td class="both">Performs the form but often misses the conceptual leap.<span class="zh-row">执行形式但常错过概念性跃迁。</span></td></tr>
+          <tr><td>Intuitive · 直觉</td><td class="both">Trained by lived experience. Embodied.<span class="zh-row">由切身经验训练。具身。</span></td><td class="both">Trained by text patterns. Confidently confabulates outside distribution.<span class="zh-row">由文本模式训练。在分布外自信地编造。</span></td></tr>
+          <tr><td>Abstract · 抽象</td><td class="both">Strong for some, very weak for others.<span class="zh-row">某些人很强，某些人极弱。</span></td><td class="both">Uniformly strong; the AI's natural mode.<span class="zh-row">普遍很强；AI 的天然模式。</span></td></tr>
+          <tr><td>Concrete · 具体</td><td class="both">Universally available. Embodied.<span class="zh-row">普遍可得。具身。</span></td><td class="both">Weak. Cannot ground in physical world without tools.<span class="zh-row">弱。无工具时无法在物理世界扎根。</span></td></tr>
+          <tr><td>Design · 设计</td><td class="both">Requires empathy, taste, embodied iteration.<span class="zh-row">需共情、品味、具身迭代。</span></td><td class="both">Can simulate the form. Cannot want what users want.<span class="zh-row">能模拟形式。不能像用户那样欲望某物。</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight">
+      <div class="lab">The reframe · 重新框架</div>
+      <div class="pair">
+        <p>Frontier AI is uniformly strong on the abstract / analytical / critical end of the radar, and uniformly weak on the concrete / intuitive / design end. The human cognitive moat is not raw intelligence — it is being grounded in a body, a life, and a moral context. For the next decade, the best thinking will be human-style choosing what matters + AI-style exploring how.</p>
+        <p class="zh">前沿 AI 在雷达图的抽象 / 分析 / 批判一端普遍很强，在具体 / 直觉 / 设计一端普遍很弱。人类的认知护城河不是原始智力——而是在身体、生命与道德语境中扎根。在未来十年中，最好的思考是「人类式选择什么重要 + AI 式探索如何实现」。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-pair">
+      <p>An independent, bilingual atlas of thinking styles. Sources: Kahneman (<em>Thinking, Fast and Slow</em>), de Bono (<em>Lateral Thinking</em>), Donella Meadows (<em>Thinking in Systems</em>), Brown (<em>Change by Design</em>), Tetlock (<em>Superforecasting</em>), and the cognitive-science literature.</p>
+      <p class="zh">关于思维方式的独立双语图谱。参考：Kahneman《思考，快与慢》、de Bono《横向思维》、Donella Meadows《系统思考》、Brown《变革之道》、Tetlock《超预测》，以及认知科学文献。</p>
+    </div>
+    <div class="foot-bottom">
+      <span>Part of the <a href="https://psyverse.fun">Psyverse</a> portfolio · 收录于 Psyverse 作品集</span>
+      <span>Compiled April 2026 · 编纂于 2026 年 4 月</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://analytics-dashboard-two-blue.vercel.app/tracker.js" defer></script>
+<script>
+// Reveal
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.06 });
+  els.forEach((el) => io.observe(el));
+})();
+
+// Radar
+(function () {
+  const canvas = document.getElementById('radar-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const W = 500, H = 500;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const dimensions = [
+    { en: "Logic", zh: "逻辑" },
+    { en: "Creativity", zh: "创造" },
+    { en: "Speed", zh: "速度" },
+    { en: "Risk", zh: "风险" },
+    { en: "Depth", zh: "深度" },
+    { en: "Adapt", zh: "适应" },
+  ];
+
+  // [logic, creativity, speed, risk, depth, adapt]
+  const STYLES = {
+    analytical:      { c: '#818cf8', en: 'Analytical', zh: '分析',  s: [95, 35, 50, 30, 90, 50] },
+    critical:        { c: '#fbbf24', en: 'Critical',   zh: '批判',  s: [90, 50, 55, 40, 85, 65] },
+    systems:         { c: '#34d399', en: 'Systems',    zh: '系统',  s: [80, 65, 40, 55, 100, 80] },
+    firstprinciples: { c: '#22d3ee', en: 'First-Principles', zh: '第一性', s: [95, 75, 30, 60, 95, 70] },
+    lateral:         { c: '#fb7185', en: 'Lateral',    zh: '横向',  s: [50, 95, 75, 80, 50, 95] },
+    divergent:       { c: '#f472b6', en: 'Divergent',  zh: '发散',  s: [45, 100, 80, 75, 45, 90] },
+    convergent:      { c: '#a78bfa', en: 'Convergent', zh: '收敛',  s: [85, 30, 70, 25, 70, 40] },
+    intuitive:       { c: '#facc15', en: 'Intuitive',  zh: '直觉',  s: [30, 70, 100, 70, 50, 75] },
+    abstract:        { c: '#06b6d4', en: 'Abstract',   zh: '抽象',  s: [80, 80, 40, 50, 100, 75] },
+    concrete:        { c: '#84cc16', en: 'Concrete',   zh: '具体',  s: [70, 30, 85, 25, 50, 50] },
+    probabilistic:   { c: '#10b981', en: 'Probabilistic', zh: '概率', s: [90, 40, 50, 65, 85, 90] },
+    design:          { c: '#ec4899', en: 'Design',     zh: '设计',  s: [70, 90, 60, 60, 75, 85] },
+  };
+
+  const active = new Set(['analytical', 'firstprinciples', 'divergent']);
+  function getFG() { return document.body.classList.contains('light') ? '#4a4863' : '#b3b0c4'; }
+  function getLine() { return document.body.classList.contains('light') ? 'rgba(179,174,204,0.55)' : 'rgba(46,50,82,0.7)'; }
+
+  function draw() {
+    const cx = W / 2, cy = H / 2;
+    const radius = 175;
+    const n = dimensions.length;
+    ctx.clearRect(0, 0, W, H);
+
+    // Grid rings
+    ctx.strokeStyle = getLine();
+    ctx.lineWidth = 0.5;
+    for (let r = 1; r <= 5; r++) {
+      ctx.beginPath();
+      for (let i = 0; i <= n; i++) {
+        const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+        const x = cx + Math.cos(a) * radius * (r / 5);
+        const y = cy + Math.sin(a) * radius * (r / 5);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+    // Spokes
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(a) * radius, cy + Math.sin(a) * radius);
+      ctx.stroke();
+    }
+    // Labels (EN + ZH on same axis)
+    ctx.fillStyle = getFG();
+    ctx.font = '12px "Space Grotesk", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+      const lx = cx + Math.cos(a) * (radius + 30);
+      const ly = cy + Math.sin(a) * (radius + 22);
+      ctx.fillText(dimensions[i].en, lx, ly - 7);
+      ctx.font = '11px "Noto Sans SC", sans-serif';
+      ctx.fillText(dimensions[i].zh, lx, ly + 7);
+      ctx.font = '12px "Space Grotesk", sans-serif';
+    }
+
+    // Polygons
+    for (const id of active) {
+      const s = STYLES[id];
+      ctx.beginPath();
+      for (let i = 0; i <= n; i++) {
+        const idx = i % n;
+        const a = (idx / n) * Math.PI * 2 - Math.PI / 2;
+        const v = s.s[idx] / 100;
+        const x = cx + Math.cos(a) * radius * v;
+        const y = cy + Math.sin(a) * radius * v;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fillStyle = s.c + '22';
+      ctx.fill();
+      ctx.strokeStyle = s.c;
+      ctx.lineWidth = 1.6;
+      ctx.stroke();
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+        const v = s.s[i] / 100;
+        const x = cx + Math.cos(a) * radius * v;
+        const y = cy + Math.sin(a) * radius * v;
+        ctx.beginPath();
+        ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = s.c;
+        ctx.fill();
+      }
+    }
+  }
+  draw();
+
+  document.querySelectorAll('.style-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      if (active.has(id)) active.delete(id);
+      else if (active.size < 4) active.add(id);
+      else return;
+      btn.classList.toggle('active');
+      draw();
+    });
+  });
+  // Re-draw on theme change
+  new MutationObserver(draw).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+})();
+
+// Best-for ranker
+const RANKINGS = {
+  creative: {
+    en: [
+      { rank: "Divergent", reason: "Generates the wide option space. Critical for early ideation when 'right answer' doesn't yet exist." },
+      { rank: "Lateral", reason: "Produces the 'obvious in retrospect' insight by escaping the dominant frame." },
+      { rank: "Design", reason: "Bridges divergent + convergent through prototyping. Ships things, not just ideas." },
+      { rank: "First-Principles", reason: "Re-derives from primitives — opens previously-locked option spaces." },
+      { rank: "Abstract", reason: "Spots cross-domain patterns that produce structurally novel solutions." },
+    ],
+    zh: [
+      { rank: "发散", reason: "生成广阔的选项空间。在「正确答案」尚不存在时的早期构想阶段至关重要。" },
+      { rank: "横向", reason: "通过逃离主导框架，产出「事后看来显然」的洞见。" },
+      { rank: "设计", reason: "通过原型，桥接发散与收敛。交付东西，而非仅仅想法。" },
+      { rank: "第一性原理", reason: "从基元重新推导——打开此前被锁死的选项空间。" },
+      { rank: "抽象", reason: "识别跨领域模式，产出结构性新颖解。" },
+    ],
+  },
+  decision: {
+    en: [
+      { rank: "Probabilistic", reason: "Forces explicit reasoning under uncertainty. Calibrates confidence to evidence." },
+      { rank: "Critical", reason: "Tests claims before commitment. Stops motivated reasoning from masquerading as analysis." },
+      { rank: "Systems", reason: "Catches second-order effects that wreck plausible-looking decisions." },
+      { rank: "Convergent", reason: "Required to actually ship a decision rather than oscillate forever." },
+      { rank: "First-Principles", reason: "When the stakes justify the cost, re-derive from scratch instead of inheriting market wisdom." },
+    ],
+    zh: [
+      { rank: "概率", reason: "强制在不确定下进行显性推理。把信心校准到证据。" },
+      { rank: "批判", reason: "在承诺前检验主张。阻止动机性推理伪装成分析。" },
+      { rank: "系统", reason: "捕获那些会摧毁「看似合理」决策的二阶效应。" },
+      { rank: "收敛", reason: "实际交付一个决定（而非无休止摇摆）所必需。" },
+      { rank: "第一性原理", reason: "当赌注值得其代价时，从头重新推导，而非继承市场智慧。" },
+    ],
+  },
+  complex: {
+    en: [
+      { rank: "Systems", reason: "Built for this exact case. Sees stocks, flows, feedback. The default tool for complex systems." },
+      { rank: "Abstract", reason: "Pulls structural pattern out of irreducible complexity. The mathematician's move." },
+      { rank: "Probabilistic", reason: "Treats complexity as distribution, not single value. Robust under uncertainty." },
+      { rank: "First-Principles", reason: "When the system is too tangled, drop to physics/logic and rebuild." },
+      { rank: "Analytical", reason: "Useful for pieces of complexity, but reductive overall — combine with Systems." },
+    ],
+    zh: [
+      { rank: "系统", reason: "正为此而设。识别存量、流量、反馈。复杂系统的默认工具。" },
+      { rank: "抽象", reason: "从不可分解的复杂中抽取结构模式。数学家的动作。" },
+      { rank: "概率", reason: "把复杂视为分布而非单值。在不确定下稳健。" },
+      { rank: "第一性原理", reason: "当系统过于纠缠时，下降到物理/逻辑层重建。" },
+      { rank: "分析", reason: "对复杂的局部有用，但整体上还原过度——需与系统结合。" },
+    ],
+  },
+  speed: {
+    en: [
+      { rank: "Intuitive", reason: "Sub-second pattern recognition. The right tool for high-frequency, well-trained domains." },
+      { rank: "Concrete", reason: "Skip abstraction; act on what's literally in front of you." },
+      { rank: "Convergent", reason: "Eliminates options fast. Picks 'good enough' over 'optimal'." },
+      { rank: "Lateral", reason: "Surprisingly fast — when the dominant frame is wrong, jumping out is faster than fixing it." },
+      { rank: "Analytical", reason: "Fastest of the deliberate styles, if domain is well-decomposable." },
+    ],
+    zh: [
+      { rank: "直觉", reason: "亚秒级模式识别。在高频、经良好训练的领域是合适工具。" },
+      { rank: "具体", reason: "跳过抽象；对眼前字面之物采取行动。" },
+      { rank: "收敛", reason: "快速剔除选项。选「足够好」而非「最优」。" },
+      { rank: "横向", reason: "意外地快——当主导框架错误时，跳出比修补更快。" },
+      { rank: "分析", reason: "若领域可良好分解，分析在所有刻意风格中最快。" },
+    ],
+  },
+  novel: {
+    en: [
+      { rank: "First-Principles", reason: "Crucial when no analogies apply yet. Builds the new model from scratch." },
+      { rank: "Critical", reason: "Stops you from importing wrong assumptions from familiar domains." },
+      { rank: "Probabilistic", reason: "Holds uncertainty open while exploring. Resists premature certainty." },
+      { rank: "Lateral", reason: "Provokes unexpected approaches when no playbook exists." },
+      { rank: "Design", reason: "Iterates safely toward fit when the answer can't be known a priori." },
+    ],
+    zh: [
+      { rank: "第一性原理", reason: "当尚无可类比之物时关键。从零构建新模型。" },
+      { rank: "批判", reason: "阻止你从熟悉领域错误导入假设。" },
+      { rank: "概率", reason: "在探索中保持不确定性敞开。抵制过早确定。" },
+      { rank: "横向", reason: "在无现成剧本时挑起意外的入手方式。" },
+      { rank: "设计", reason: "当答案不可先验得知时，安全地迭代逼近合适解。" },
+    ],
+  },
+};
+
+function renderBest(key) {
+  const data = RANKINGS[key];
+  const list = document.getElementById('best-list');
+  list.innerHTML = `
+    <div class="b-en"><ol>${data.en.map(d => `<li><div><b>${d.rank}</b>${d.reason}</div></li>`).join('')}</ol></div>
+    <div class="b-zh"><ol>${data.zh.map(d => `<li><div><b>${d.rank}</b>${d.reason}</div></li>`).join('')}</ol></div>
+  `;
+}
+renderBest('creative');
+document.querySelectorAll('.best-tab').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.best-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderBest(btn.dataset.key);
+  });
+});
+</script>
+</body>
+</html>
